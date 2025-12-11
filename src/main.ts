@@ -9,12 +9,12 @@ import "./style.css";
 
 document.getElementById("searchForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const input = document.getElementById("searchText") as HTMLInputElement;
-  if (!input.value) return;
 
-  const stops = await getStops(input.value);
+  const theInput = document.getElementById("searchText") as HTMLInputElement | null;
+  const searchText = theInput?.value || "";
+
+  const stops = await getStops(searchText);
   createHtml(stops);
 
-  input.value = "";
+  if (theInput) theInput.value = "";
 });
-

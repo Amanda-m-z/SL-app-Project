@@ -1,17 +1,17 @@
 import type { SlStop } from "./models/SlStop";
 
-export const createHtml = (stops: SlStop) => {
+export const createHtml = (stops: SlStop["locations"]) => {
   const stopsSection = document.getElementById("stops");
   if (!stopsSection) return;
-    stopsSection.innerHTML = "";
-    
-  stops.StopLocation.slice(0, 3).forEach((stop: any) => {
+
+  stopsSection.innerHTML = "";
+
+  stops.slice(0, 3).forEach((stop) => {
     const stopContainer = document.createElement("div");
     const name = document.createElement("h2");
-    name.innerHTML = stop.Name;
+    name.innerHTML = stop.name;
 
     stopContainer.appendChild(name);
-    stopsSection?.appendChild(stopContainer);
-    });
-}
-
+    stopsSection.appendChild(stopContainer);
+  });
+};
