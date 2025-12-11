@@ -1,24 +1,20 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+// const response = await fetch("https://journeyplanner.integration.sl.se/v2/stop-finder?name_sf=odenplan&any_obj_filter_sf=2&type_sf=any");
+// const data = await response.json();
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+// console.log("Request data:", data);
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+import { createHtml } from "./htmlUtils";
+import { getStops } from "./services/slService";
+import "./style.css";
+
+document.getElementById("searchForm")?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const input = document.getElementById("searchText") as HTMLInputElement;
+  if (!input.value) return;
+
+  const stops = await getStops(input.value);
+  createHtml(stops);
+
+  input.value = "";
+});
+
