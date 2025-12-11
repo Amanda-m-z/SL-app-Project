@@ -7,14 +7,37 @@ import { createHtml } from "./htmlUtils";
 import { getStops } from "./services/slService";
 import "./style.css";
 
+import { createHtml } from "./htmlUtils";
+import { getStops } from "./services/slService";
+import "./style.css";
+
+const mapFrame = document.getElementById("map") as HTMLIFrameElement;
+
+function showMap(lat: number, lon: number) {
+  if (!mapFrame) return;
+  mapFrame.src = `https://maps.google.com/maps?q=${lat},${lon}&z=15&output=embed`;
+}
+
+navigator.geolocation.getCurrentPosition((pos) => {
+  const { latitude, longitude } = pos.coords;
+  showMap(latitude, longitude);
+});
+
 document.getElementById("searchForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const theInput = document.getElementById("searchText") as HTMLInputElement | null;
-  const searchText = theInput?.value || "";
+  const input = document.getElementById(
+    "searchText"
+  ) as HTMLInputElement | null;
+  const searchText = input?.value.trim() || "";
 
   const stops = await getStops(searchText);
   createHtml(stops);
 
-  if (theInput) theInput.value = "";
+  if (stops.length > 0) {
+    const [lat, lon] = stops[0].coord;
+    showMap(lat, lon);
+  }
+
+  if (input) input.value = "";
 });
