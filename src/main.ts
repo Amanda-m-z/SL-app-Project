@@ -7,10 +7,6 @@ import { createHtml } from "./htmlUtils";
 import { getStops } from "./services/slService";
 import "./style.css";
 
-import { createHtml } from "./htmlUtils";
-import { getStops } from "./services/slService";
-import "./style.css";
-
 const mapFrame = document.getElementById("map") as HTMLIFrameElement;
 
 function showMap(lat: number, lon: number) {
