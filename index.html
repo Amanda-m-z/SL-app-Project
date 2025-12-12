@@ -8,11 +8,17 @@
 <body>
   <div id="app">
     <form id="searchForm">
-      <input type="text" id="searchText" placeholder="Skriv adress..." />
+      <input type="text" id="searchText"  placeholder="Skriv adress..." minlength="1"/>
       <button>Sök</button>
     </form>
     <section id="stops"></section>
+    <section id="showResult" class="Hidden">
     <iframe id="map"></iframe>
+    <div id="theInfo">INFO
+    <h1>Resor</h1>
+    <p>Här är info för resa</p>
+    </div>
+    </section>
   </div>
   <script type="module" src="/src/main.ts"></script>
 </body>
