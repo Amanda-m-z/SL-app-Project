@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-import './style.css'
-
-const response = await fetch ("https://journeyplanner.integration.sl.se/v2/system-info");
-const data = await response.json();
-
-console.log(data);
-=======
-// const response = await fetch("https://journeyplanner.integration.sl.se/v2/stop-finder?name_sf=odenplan&any_obj_filter_sf=2&type_sf=any");
-// const data = await response.json();
-
-// console.log("Request data:", data);
-
 import { createHtml } from "./htmlUtils";
 import { getStops } from "./services/slService";
 import "./style.css";
@@ -43,4 +30,3 @@ document.getElementById("searchForm")?.addEventListener("submit", async (e) => {
 
   if (input) input.value = "";
 });
->>>>>>> f66ff91828383e749e199df83a40d49a2faf7074
