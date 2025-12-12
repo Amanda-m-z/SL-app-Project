@@ -1,6 +1,6 @@
-import type { SlStop } from "./models/SlStop";
+import { showMap } from "./main";
 
-export const createHtml = (stops: SlStop["locations"]) => {
+export const createHtml = (stops) => {
   const stopsSection = document.getElementById("stops");
   if (!stopsSection) return;
 
@@ -8,10 +8,18 @@ export const createHtml = (stops: SlStop["locations"]) => {
 
   stops.slice(0, 3).forEach((stop) => {
     const stopContainer = document.createElement("div");
+    stopContainer.classList.add("stop-item");
+
     const name = document.createElement("h2");
-    name.innerHTML = stop.name;
+    name.textContent = stop.name;
 
     stopContainer.appendChild(name);
+
+    stopContainer.addEventListener("click", () => {
+      const [lat, lon] = stop.coord;
+      showMap(lat, lon);  
+    });
+
     stopsSection.appendChild(stopContainer);
   });
 };

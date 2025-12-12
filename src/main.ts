@@ -9,10 +9,10 @@ import "./style.css";
 
 const mapFrame = document.getElementById("map") as HTMLIFrameElement;
 
-function showMap(lat: number, lon: number) {
+export const showMap = (lat: number, lon: number): void => {
   if (!mapFrame) return;
   mapFrame.src = `https://maps.google.com/maps?q=${lat},${lon}&z=15&output=embed`;
-}
+};
 
 navigator.geolocation.getCurrentPosition((pos) => {
   const { latitude, longitude } = pos.coords;
@@ -22,9 +22,7 @@ navigator.geolocation.getCurrentPosition((pos) => {
 document.getElementById("searchForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const input = document.getElementById(
-    "searchText"
-  ) as HTMLInputElement | null;
+  const input = document.getElementById("searchText") as HTMLInputElement | null;
   const searchText = input?.value.trim() || "";
 
   const stops = await getStops(searchText);
