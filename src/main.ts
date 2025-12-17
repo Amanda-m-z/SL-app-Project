@@ -5,8 +5,6 @@ import "./style.css";
 const mapFrame = document.getElementById("map") as HTMLIFrameElement;
 const showTheStop = document.getElementById("showResult");
 
-
-
 export const showMap = (lat: number, lon: number): void => {
   if (!mapFrame) return;
   mapFrame.src = `https://maps.google.com/maps?q=${lat},${lon}&z=15&output=embed`;
@@ -24,7 +22,8 @@ document.getElementById("searchForm")?.addEventListener("submit", async (e) => {
   const input = document.getElementById("searchText") as HTMLInputElement | null;
   const searchText = input?.value.trim() || "";
   if (searchText.length > 0){
-    if (showTheStop) showTheStop.className = "Show"; 
+    if (showTheStop) showTheStop.className = "Show";
+
   }
   
 
@@ -38,3 +37,5 @@ document.getElementById("searchForm")?.addEventListener("submit", async (e) => {
 
   if (input) input.value = "";
 });
+
+
